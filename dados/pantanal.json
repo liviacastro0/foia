@@ -1,0 +1,28 @@
+{
+  "bioma": "Pantanal",
+  "caracteristicas": {
+    "area_km2": 150355,
+    "precipitacao_mm_ano": 1200,
+    "temperatura_media_c": 26
+  },
+  "solos": [
+    {
+      "tipo": "Gleissolo",
+      "textura": "argilosa",
+      "ph_medio": 6.0,
+      "materia_organica_percent": 6.2,
+      "nutrientes_kg_ha": {
+        "N": 35,
+        "P": 15,
+        "K": 55
+      },
+      "drenagem": "imperfeita",
+      "aptidao": "pecuária, arroz irrigado"
+    },
+    {
+      "tipo": "Neossolo Flúvico",
+      "textura": "franco",
+      "aptidao": "pastagens nativas"
+    }
+  ]
+}

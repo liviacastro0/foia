@@ -6,13 +6,10 @@
   <link rel="icon" href="https://github.com/liviacastro0/imgs/blob/main/logo.png?raw=true" type="image/png">
   <link rel="stylesheet" href="style.css">
   <title>Análise de Solo Agrícola - IA Especializada</title>
+
 </head>
 
 <body>
-  <style>
-   
-  </style>
-
   <div class="container">
     <h1>Análise de Solo Agrícola Inteligente</h1>
 
@@ -21,7 +18,7 @@
         <div class="form-group">
           <label for="nitrogenio">
             Nitrogênio (kg/ha)
-            <span class="info-icon" title="Valor ideal: 20-50 kg/ha para maioria das culturas"></span>
+            <span class="info-icon" title="Valor ideal: 20-50 kg/ha para maioria das culturas">i</span>
           </label>
           <input type="number" id="nitrogenio" name="nitrogenio" placeholder="Ex: 25" min="0" max="80" required />
           <span class="input-hint">Faixa: 0-80 kg/ha</span>
@@ -30,7 +27,7 @@
         <div class="form-group">
           <label for="fosforo">
             Fósforo (kg/ha)
-            <span class="info-icon" title="Valor ideal: 15-40 kg/ha para grãos"></span>
+            <span class="info-icon" title="Valor ideal: 15-40 kg/ha para grãos">i</span>
           </label>
           <input type="number" id="fosforo" name="fosforo" placeholder="Ex: 15" min="0" max="80" required />
           <span class="input-hint">Faixa: 0-80 kg/ha</span>
@@ -39,7 +36,7 @@
         <div class="form-group">
           <label for="potassio">
             Potássio (kg/ha)
-            <span class="info-icon" title="Valor ideal: 40-80 kg/ha para frutíferas"></span>
+            <span class="info-icon" title="Valor ideal: 40-80 kg/ha para frutíferas">i</span>
           </label>
           <input type="number" id="potassio" name="potassio" placeholder="Ex: 50" min="0" max="80" required />
           <span class="input-hint">Faixa: 0-80 kg/ha</span>
@@ -48,7 +45,7 @@
         <div class="form-group">
           <label for="temperatura">
             Temperatura (°C)
-            <span class="info-icon" title="Temperatura média anual do local"></span>
+            <span class="info-icon" title="Temperatura média anual do local">i</span>
           </label>
           <input type="number" id="temperatura" name="temperatura" placeholder="Ex: 23" min="-25" max="80" required />
           <span class="input-hint">Faixa: -25°C a 80°C</span>
@@ -57,7 +54,7 @@
         <div class="form-group">
           <label for="umidade">
             Umidade (%)
-            <span class="info-icon" title="Umidade relativa média do solo"></span>
+            <span class="info-icon" title="Umidade relativa média do solo">i</span>
           </label>
           <input type="text" id="umidade" name="umidade" placeholder="Ex: 60,00" required />
           <span class="input-hint">Formato: 00,00 (0-100%)</span>
@@ -66,7 +63,7 @@
         <div class="form-group">
           <label for="ph">
             pH do Solo
-            <span class="info-icon" title="Escala de 0 (ácido) a 14 (alcalino)"></span>
+            <span class="info-icon" title="Escala de 0 (ácido) a 14 (alcalino)">i</span>
           </label>
           <input type="text" id="ph" name="ph" placeholder="Ex: 6,50" required />
           <span class="input-hint">Escala: 0 (ácido) a 14 (alcalino)</span>
@@ -76,7 +73,7 @@
       <div class="form-group">
         <label for="chuva">
           Precipitação (mm/mês)
-          <span class="info-icon" title="Média mensal de chuva na região"></span>
+          <span class="info-icon" title="Média mensal de chuva na região">i</span>
         </label>
         <input type="text" id="chuva" name="chuva" placeholder="Ex: 120,000" required />
         <span class="input-hint">Formato: 000,000</span>
@@ -85,7 +82,7 @@
       <div class="form-group">
         <label for="regiao">
           Região/Clima
-          <span class="info-icon" title="Selecione o bioma predominante"></span>
+          <span class="info-icon" title="Selecione o bioma predominante">i</span>
         </label>
         <select id="regiao" name="regiao" required>
           <option value="">Selecione...</option>
@@ -95,7 +92,6 @@
           <option value="Caatinga">Caatinga</option>
           <option value="Pampa">Pampa</option>
           <option value="Pantanal">Pantanal</option>
-          <option value="Outro">Outro</option>
         </select>
       </div>
 
@@ -110,7 +106,6 @@
       </div>
     </form>
 
-    <!-- Tabela de Referência (oculta inicialmente) -->
     <table id="tabela-referencia">
       <thead>
         <tr>
@@ -153,17 +148,97 @@
       </tbody>
     </table>
 
-    <!-- Seção de Resposta -->
     <section id="respostaIA" class="resposta-ia" aria-live="polite" hidden>
       <h2>Recomendações Personalizadas</h2>
       <div id="conteudoResposta"></div>
-      
-  
     </section>
   </div>
 
   <script>
-    // Funções de máscara e validação
+    let dadosBiomas = {
+      "Amazônia": { 
+        caracteristicas: { 
+          precipitacao_mm_ano: 2500,
+          temperatura_media: 26
+        }, 
+        solos: [{ 
+          textura: "argilosa", 
+          aptidao: "cacau, açaí, guaraná",
+          tipo: "Latossolo"
+        }] 
+      },
+      "Cerrado": { 
+        caracteristicas: { 
+          precipitacao_mm_ano: 1500,
+          temperatura_media: 24
+        }, 
+        solos: [{ 
+          textura: "média", 
+          aptidao: "soja, milho, algodão",
+          tipo: "Latossolo vermelho"
+        }] 
+      },
+      "Mata Atlântica": { 
+        caracteristicas: { 
+          precipitacao_mm_ano: 1800,
+          temperatura_media: 22
+        }, 
+        solos: [{ 
+          textura: "argilosa", 
+          aptidao: "café, cana-de-açúcar, eucalipto",
+          tipo: "Terra roxa"
+        }] 
+      },
+      "Caatinga": { 
+        caracteristicas: { 
+          precipitacao_mm_ano: 600,
+          temperatura_media: 28
+        }, 
+        solos: [{ 
+          textura: "arenosa", 
+          aptidao: "manga, uva irrigada, caju",
+          tipo: "Neossolo"
+        }] 
+      },
+      "Pampa": { 
+        caracteristicas: { 
+          precipitacao_mm_ano: 1200,
+          temperatura_media: 18
+        }, 
+        solos: [{ 
+          textura: "média", 
+          aptidao: "arroz, trigo, soja",
+          tipo: "Planossolo"
+        }] 
+      },
+      "Pantanal": { 
+        caracteristicas: { 
+          precipitacao_mm_ano: 1300,
+          temperatura_media: 26
+        }, 
+        solos: [{ 
+          textura: "argilosa", 
+          aptidao: "arroz, pecuária, pesca",
+          tipo: "Gleissolo"
+        }] 
+      }
+    };
+
+    function getDadosBioma(bioma) {
+      if (!bioma || !dadosBiomas[bioma]) return null;
+      
+      const dados = dadosBiomas[bioma];
+      const soloPrincipal = dados.solos && dados.solos.length > 0 ? dados.solos[0] : {};
+      
+      return {
+        textura: soloPrincipal.textura || 'não especificada',
+        precipitacao: dados.caracteristicas?.precipitacao_mm_ano || 'não especificada',
+        aptidao: soloPrincipal.aptidao || 'não especificada',
+        tipoSolo: soloPrincipal.tipo || 'não especificado',
+        temperatura: dados.caracteristicas?.temperatura_media || 'não especificada'
+      };
+    }
+
     function aplicarMascaraComVirgula(campoId, maxValor) {
       const campo = document.getElementById(campoId);
       campo.addEventListener('input', function() {
@@ -221,7 +296,6 @@
     function validarDadosAgricolas(dados) {
       const erros = [];
       
-      // Valores típicos para análise de solo
       if (dados.nitrogenio > 80 || dados.nitrogenio < 0) erros.push("Nitrogênio fora da faixa (0-80 kg/ha)");
       if (dados.fosforo > 80 || dados.fosforo < 0) erros.push("Fósforo fora da faixa (0-80 kg/ha)");
       if (dados.potassio > 80 || dados.potassio < 0) erros.push("Potássio fora da faixa (0-80 kg/ha)");
@@ -238,11 +312,9 @@
       return erros;
     }
 
-    // Função principal para processar o formulário
     async function processarFormulario(event) {
       event.preventDefault();
 
-      // Obter valores do formulário
       const dados = {
         nitrogenio: parseInt(document.getElementById('nitrogenio').value),
         fosforo: parseInt(document.getElementById('fosforo').value),
@@ -254,19 +326,16 @@
         regiao: document.getElementById('regiao').value
       };
 
-      // Validar dados
       const erros = validarDadosAgricolas(dados);
       if (erros.length > 0) {
         alert("Erros encontrados:\n\n" + erros.join("\n"));
         return false;
       }
 
-      // Mostrar loading
       document.getElementById('spinner').style.display = 'inline-block';
       document.getElementById('btn-text').textContent = 'Processando...';
       document.getElementById('submit-btn').disabled = true;
 
-      // Mostrar seção de resposta
       const respostaIA = document.getElementById("respostaIA");
       const conteudoResposta = document.getElementById("conteudoResposta");
       respostaIA.hidden = false;
@@ -277,163 +346,230 @@
         </div>
       `;
 
-      try {
-        // Construir o prompt avançado
-        const prompt = `Você é um engenheiro agrônomo especializado em análise de solo. Com base nos dados abaixo, forneça:
-1. Cultura principal recomendada e cultura alternativa (justifique com os parâmetros do solo deixe a justificativa na linha abaixo da informação recomendada respectivamente).
-2. Recomendações detalhadas para cada cultura:
-3.- Preparo do solo (correção de pH, adubação orgânica/mineral)
-4. Exigências hídricas (intervalo de irrigação)
-5. Controle de pragas/doenças mais comuns
-6. Época ideal de plantio (considerando temperatura e chuva)
-3. Atenção a riscos: 
-   - Exemplo: "Se o pH < 5.5, existe a necessidade de calagem".
+      // Simulamos um delay para parecer que está processando
+      setTimeout(() => {
+        try {
+          const dadosBioma = getDadosBioma(dados.regiao) || {};
+          const resposta = gerarRespostaSimulada(dados, dadosBioma);
+          
+          conteudoResposta.innerHTML = formatarRespostaAgricultura(resposta);
 
-Dados:
-- Nitrogênio: ${dados.nitrogenio} kg/ha
-- Fósforo: ${dados.fosforo} kg/ha
-- Potássio: ${dados.potassio} kg/ha
-- pH: ${dados.ph}
-- Umidade: ${dados.umidade}%
-- Temperatura média: ${dados.temperatura}°C
-- Precipitação: ${dados.chuva} mm/mês
-- Região: ${dados.regiao}
+          if (dadosBioma) {
+            conteudoResposta.innerHTML += `
+              <div class="bioma-info">
+                <h3>Características do ${dados.regiao}</h3>
+                <p><strong>Textura predominante:</strong> ${dadosBioma.textura}</p>
+                <p><strong>Precipitação média:</strong> ${dadosBioma.precipitacao}mm/ano</p>
+                <p><strong>Temperatura média:</strong> ${dadosBioma.temperatura}°C</p>
+                <p><strong>Culturas típicas:</strong> ${dadosBioma.aptidao}</p>
+              </div>
+            `;
+          }
 
-Responda em tópicos curtos mas com informações precisas, com linguagem técnica acessível. Use tabelas quando apropriado.`;
+          conteudoResposta.innerHTML += `
+            <div style="text-align:center;margin-top:2em;">
+              <button id="btn-copiar" style="background:#0078D7;color:white;border:none;padding:0.5em 1em;border-radius:4px;cursor:pointer;font-size:0.9em;">
+                Copiar recomendações
+              </button>
+            </div>
+          `;
 
-        // Chave da API (substitua pela sua chave real)
-        const key = "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";
-
-        // Chamada à API OpenRouter
-        const resposta = await callOpenRouter(prompt, key);
-
-        // Exibir a resposta formatada
-        conteudoResposta.innerHTML = formatarRespostaAgricultura(resposta);
-
-        // Adicionar botão de copiar
-        conteudoResposta.innerHTML += `
-          <div style="text-align:center;margin-top:2em;">
-            <button id="btn-copiar" style="background:#0078D7;color:white;border:none;padding:0.5em 1em;border-radius:4px;cursor:pointer;font-size:0.9em;">
-              📋 Copiar recomendações
-            </button>
-          </div>
-        `;
-
-        // Adicionar evento ao botão de copiar
-        document.getElementById('btn-copiar').addEventListener('click', function() {
-          const textoParaCopiar = document.getElementById('conteudoResposta').innerText;
-          navigator.clipboard.writeText(textoParaCopiar).then(() => {
-            const btn = this;
-            const textoOriginal = btn.textContent;
-            btn.textContent = '✅ Copiado!';
-            btn.style.background = '#28a745';
-            setTimeout(() => {
-              btn.textContent = textoOriginal;
-              btn.style.background = '#0078D7';
-            }, 2000);
+          document.getElementById('btn-copiar').addEventListener('click', function() {
+            const textoParaCopiar = document.getElementById('conteudoResposta').innerText;
+            navigator.clipboard.writeText(textoParaCopiar).then(() => {
+              const btn = this;
+              const textoOriginal = btn.textContent;
+              btn.textContent = 'Copiado!';
+              btn.style.background = '#28a745';
+              setTimeout(() => {
+                btn.textContent = textoOriginal;
+                btn.style.background = '#0078D7';
+              }, 2000);
+            });
           });
-        });
 
-      } catch (e) {
-        conteudoResposta.innerHTML = `
-          <div style="color:#b00;background:#fff3f3;padding:1em;border-radius:6px;">
-            <strong>Erro ao conectar com o especialista agrícola.</strong>
-            <p>${e.message || 'Verifique sua conexão e tente novamente.'}</p>
-          </div>
-        `;
-        console.error(e);
-      } finally {
-        document.getElementById('spinner').style.display = 'none';
-        document.getElementById('btn-text').textContent = 'Analisar Solo';
-        document.getElementById('submit-btn').disabled = false;
-      }
+        } catch (e) {
+          conteudoResposta.innerHTML = `
+            <div style="color:#b00;background:#fff3f3;padding:1em;border-radius:6px;">
+              <strong>Erro ao gerar recomendações.</strong>
+              <p>${e.message || 'Por favor, tente novamente.'}</p>
+            </div>
+          `;
+          console.error(e);
+        } finally {
+          document.getElementById('spinner').style.display = 'none';
+          document.getElementById('btn-text').textContent = 'Analisar Solo';
+          document.getElementById('submit-btn').disabled = false;
+        }
+      }, 1500); // Delay de 1.5 segundos
     }
 
-    // Função para chamar a API OpenRouter
-    async function callOpenRouter(prompt, key) {
-      const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          "Authorization": "Bearer " + key,
-          "Content-Type": "application/json",
-          "HTTP-Referer": window.location.href,
-          "X-Title": "Análise de Solo Agrícola - IA Especializada"
+    function gerarRespostaSimulada(dados, dadosBioma) {
+      const ph = parseFloat(dados.ph.replace(',', '.'));
+      const umidade = parseFloat(dados.umidade.replace(',', '.'));
+      const chuva = parseFloat(dados.chuva.replace(',', '.'));
+      
+      // Culturas recomendadas por região
+      const culturasPorRegiao = {
+        "Amazônia": {
+          principal: "Cacau",
+          alternativa: "Açaí",
+          outras: ["Guaraná", "Pupunha"]
         },
-        body: JSON.stringify({
-          model: "anthropic/claude-3-haiku", // Modelo mais rápido e econômico
-          temperature: 0.5, // Menos criativo, mais factual
-          max_tokens: 2000,
-          messages: [{ role: "user", content: prompt }]
-        })
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error?.message || "Erro na API");
+        "Cerrado": {
+          principal: "Soja",
+          alternativa: "Milho",
+          outras: ["Algodão", "Sorgo"]
+        },
+        "Mata Atlântica": {
+          principal: "Café",
+          alternativa: "Cana-de-açúcar",
+          outras: ["Eucalipto", "Banana"]
+        },
+        "Caatinga": {
+          principal: "Manga",
+          alternativa: "Uva irrigada",
+          outras: ["Caju", "Goiaba"]
+        },
+        "Pampa": {
+          principal: "Arroz",
+          alternativa: "Trigo",
+          outras: ["Soja", "Pastagens"]
+        },
+        "Pantanal": {
+          principal: "Arroz",
+          alternativa: "Pecuária",
+          outras: ["Piscicultura", "Capim"]
+        }
+      };
+      
+      const culturas = culturasPorRegiao[dados.regiao] || {
+        principal: "Soja",
+        alternativa: "Milho",
+        outras: ["Feijão", "Trigo"]
+      };
+      
+      // Recomendações baseadas nos valores
+      const recomendacoes = [];
+      
+      // Recomendações de pH
+      if (ph < 5.5) {
+        recomendacoes.push("Aplicação de calcário para corrigir acidez do solo");
+        recomendacoes.push(`Dose sugerida: ${Math.round((6.0 - ph) * 2000)} kg/ha de calcário dolomítico`);
+      } else if (ph > 7.5) {
+        recomendacoes.push("Solo alcalino, considerar aplicação de gesso agrícola");
+      } else {
+        recomendacoes.push("pH do solo dentro da faixa ideal para maioria das culturas");
       }
-
-      const data = await response.json();
-      return data.choices?.[0]?.message?.content || "Sem resposta da IA.";
+      
+      // Recomendações de nutrientes
+      if (dados.nitrogenio < 20) {
+        recomendacoes.push(`Adubação nitrogenada recomendada: ${Math.round((30 - dados.nitrogenio) * 1.5)} kg/ha de N`);
+      }
+      
+      if (dados.fosforo < 15) {
+        recomendacoes.push(`Adubação fosfatada recomendada: ${Math.round((25 - dados.fosforo) * 1.8)} kg/ha de P2O5`);
+      }
+      
+      if (dados.potassio < 40) {
+        recomendacoes.push(`Adubação potássica recomendada: ${Math.round((60 - dados.potassio) * 1.2)} kg/ha de K2O`);
+      }
+      
+      // Recomendações de umidade
+      if (umidade < 40) {
+        recomendacoes.push("Solo com baixa umidade, considerar irrigação complementar");
+      } else if (umidade > 80) {
+        recomendacoes.push("Solo com excesso de umidade, avaliar drenagem");
+      }
+      
+      // Época de plantio baseada na temperatura
+      let epocaPlantio = "Durante a estação chuvosa";
+      if (dados.temperatura > 25) {
+        epocaPlantio = "No início das chuvas (outubro/novembro)";
+      } else if (dados.temperatura < 15) {
+        epocaPlantio = "Na primavera (setembro/outubro)";
+      }
+      
+      return `
+      <h3>1. Diagnóstico do Solo</h3>
+      <p><strong>Nutrientes:</strong></p>
+      <ul>
+        <li>Nitrogênio: ${dados.nitrogenio} kg/ha (${dados.nitrogenio < 20 ? 'Baixo' : 'Adequado'})</li>
+        <li>Fósforo: ${dados.fosforo} kg/ha (${dados.fosforo < 15 ? 'Baixo' : 'Adequado'})</li>
+        <li>Potássio: ${dados.potassio} kg/ha (${dados.potassio < 40 ? 'Baixo' : 'Adequado'})</li>
+      </ul>
+      
+      <p><strong>Características físicas:</strong></p>
+      <ul>
+        <li>pH: ${dados.ph} (${ph < 5.5 ? 'Ácido' : ph > 7.5 ? 'Alcalino' : 'Ideal'})</li>
+        <li>Umidade: ${dados.umidade}% (${umidade < 40 ? 'Baixa' : umidade > 80 ? 'Alta' : 'Adequada'})</li>
+        <li>Precipitação: ${dados.chuva} mm/mês</li>
+        <li>Temperatura: ${dados.temperatura}°C</li>
+      </ul>
+      
+      <h3>2. Recomendações Agrícolas</h3>
+      <p><strong>Culturas recomendadas para ${dados.regiao}:</strong></p>
+      <ul>
+        <li>Principal: ${culturas.principal}</li>
+        <li>Alternativa: ${culturas.alternativa}</li>
+        <li>Outras opções: ${culturas.outras.join(', ')}</li>
+      </ul>
+      
+      <p><strong>Época ideal de plantio:</strong> ${epocaPlantio}</p>
+      
+      <h3>3. Manejo e Correções</h3>
+      <ul>
+        ${recomendacoes.map(rec => `<li>${rec}</li>`).join('')}
+      </ul>
+      
+      <h3>4. Adubação Orgânica</h3>
+      <p>Recomenda-se aplicação de 5-10 ton/ha de composto orgânico para melhorar a estrutura do solo.</p>
+      `;
     }
 
-    // Função para formatar a resposta da IA para agricultura - Versão simplificada
     function formatarRespostaAgricultura(texto) {
-      // Remove markdown (**, ##, etc.)
+      // Remove markdown simples e formata parágrafos
       texto = texto.replace(/\*\*/g, '')
                    .replace(/#{1,6}/g, '')
-                   .replace(/`/g, '');
+                   .replace(/`/g, '')
+                   .replace(/\n\n/g, '</p><p>')
+                   .replace(/\n/g, '<br>');
       
-      // Processa quebras de linha e tópicos
-      const linhas = texto.split('\n').filter(linha => linha.trim() !== '');
-      
-      // Cria a estrutura HTML simplificada
-      let html = '';
-      
-      for (let i = 0; i < linhas.length; i++) {
-        const linha = linhas[i].trim();
-        
-        // Se for um título numerado (1., 2., etc.)
-        if (/^\d+\.\s/.test(linha)) {
-          if (i > 0) html += '<br>'; // Espaço entre seções
-          html += `<h3>${linha}</h3>`;
-        } 
-        // Se for um subtítulo (com :)
-        else if (/:$/.test(linha)) {
-          html += `<p><strong>${linha}</strong></p>`;
-        }
-        // Linhas normais
-        else {
-          html += `<p>${linha}</p>`;
-        }
-      }
-      
-      return html;
+      return `<div>${texto}</div>`;
     }
 
-    // Inicialização
     document.addEventListener('DOMContentLoaded', function() {
-      // Aplicar máscaras
+      // Inicializa as máscaras e validações
       aplicarMascaraComVirgula('umidade', 100);
       aplicarMascaraComVirgula('ph', 14);
       mascaraChuva('chuva');
 
-      // Limitar valores
       limitarValor('nitrogenio', 0, 80);
       limitarValor('fosforo', 0, 80);
       limitarValor('potassio', 0, 80);
       limitarValor('temperatura', -25, 80);
 
-      // Validar campos em tempo real
+      // Validação ao sair do campo
       document.querySelectorAll('input, select').forEach(input => {
         input.addEventListener('blur', function() {
           validarCampo(this);
         });
       });
 
-      // Botão de ajuda (mostrar tabela)
+      // Botão de ajuda
       document.getElementById('btn-ajuda').addEventListener('click', function() {
         const tabela = document.getElementById('tabela-referencia');
         tabela.style.display = tabela.style.display === 'none' ? 'table' : 'none';
+      });
+
+      // Mostra informações do bioma selecionado
+      document.getElementById('regiao').addEventListener('change', function() {
+        const biomaSelecionado = this.value;
+        const dados = getDadosBioma(biomaSelecionado);
+        
+        if (dados) {
+          console.log(`Bioma selecionado: ${biomaSelecionado}`, dados);
+        }
       });
     });
   </script>

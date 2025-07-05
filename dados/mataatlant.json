@@ -1,0 +1,28 @@
+{
+  "bioma": "Mata Atlântica",
+  "caracteristicas": {
+    "area_km2": 1110217,
+    "precipitacao_mm_ano": 1800,
+    "temperatura_media_c": 22
+  },
+  "solos": [
+    {
+      "tipo": "Argissolo Vermelho-Amarelo",
+      "textura": "franco-argilosa",
+      "ph_medio": 5.5,
+      "materia_organica_percent": 4.5,
+      "nutrientes_kg_ha": {
+        "N": 25,
+        "P": 12,
+        "K": 50
+      },
+      "aptidao": "café, banana, cana-de-açúcar"
+    },
+    {
+      "tipo": "Cambissolo",
+      "textura": "franco",
+      "ph_medio": 6.2,
+      "aptidao": "hortaliças, floricultura"
+    }
+  ]
+}

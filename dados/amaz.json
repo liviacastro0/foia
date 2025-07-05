@@ -1,0 +1,34 @@
+{
+  "bioma": "Amazônia",
+  "caracteristicas": {
+    "area_km2": 4196943,
+    "precipitacao_mm_ano": 2300,
+    "temperatura_media_c": 26
+  },
+  "solos": [
+    {
+      "tipo": "Latossolo Amarelo",
+      "textura": "argilosa",
+      "ph_medio": 4.5,
+      "materia_organica_percent": 3.2,
+      "nutrientes_kg_ha": {
+        "N": 18,
+        "P": 5,
+        "K": 35
+      },
+      "drenagem": "boa",
+      "aptidao": "cacau, guaraná, palma de óleo"
+    },
+    {
+      "tipo": "Podzólico Vermelho-Amarelo",
+      "textura": "média",
+      "ph_medio": 5.2,
+      "nutrientes_kg_ha": {
+        "N": 22,
+        "P": 8,
+        "K": 40
+      },
+      "aptidao": "mandioca, frutíferas regionais"
+    }
+  ]
+}

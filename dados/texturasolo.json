@@ -1,0 +1,45 @@
+{
+  "texturas": [
+    {
+      "tipo": "arenosa",
+      "composicao": {
+        "areia_percent": 85,
+        "silte_percent": 10,
+        "argila_percent": 5
+      },
+      "caracteristicas": {
+        "retencao_agua": "baixa",
+        "aereacao": "alta",
+        "fertilidade": "baixa"
+      }
+    },
+    {
+      "tipo": "franco-arenosa",
+      "composicao": {
+        "areia_percent": 65,
+        "silte_percent": 20,
+        "argila_percent": 15
+      },
+      "retencao_agua": "média"
+    },
+    {
+      "tipo": "franco",
+      "composicao": {
+        "areia_percent": 40,
+        "silte_percent": 40,
+        "argila_percent": 20
+      },
+      "fertilidade": "alta"
+    },
+    {
+      "tipo": "argilosa",
+      "composicao": {
+        "areia_percent": 20,
+        "silte_percent": 30,
+        "argila_percent": 50
+      },
+      "retencao_agua": "alta"
+    }
+  ],
+  "fonte": "EMBRAPA Solos 2022"
+}

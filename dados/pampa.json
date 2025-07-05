@@ -1,0 +1,28 @@
+{
+  "bioma": "Pampa",
+  "caracteristicas": {
+    "area_km2": 176496,
+    "precipitacao_mm_ano": 1300,
+    "temperatura_media_c": 18
+  },
+  "solos": [
+    {
+      "tipo": "Chernossolo",
+      "textura": "argilosa",
+      "ph_medio": 6.5,
+      "materia_organica_percent": 5.0,
+      "nutrientes_kg_ha": {
+        "N": 30,
+        "P": 20,
+        "K": 60
+      },
+      "aptidao": "arroz, pecuária extensiva"
+    },
+    {
+      "tipo": "Planossolo",
+      "textura": "franco-argilosa",
+      "ph_medio": 5.8,
+      "aptidao": "pastagens naturais"
+    }
+  ]
+}

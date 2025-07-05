@@ -1,0 +1,28 @@
+{
+  "bioma": "Caatinga",
+  "caracteristicas": {
+    "area_km2": 844453,
+    "precipitacao_mm_ano": 600,
+    "temperatura_media_c": 28
+  },
+  "solos": [
+    {
+      "tipo": "Luvissolo",
+      "textura": "argilosa",
+      "ph_medio": 7.2,
+      "materia_organica_percent": 0.8,
+      "nutrientes_kg_ha": {
+        "N": 8,
+        "P": 5,
+        "K": 18
+      },
+      "aptidao": "manga, uva irrigada"
+    },
+    {
+      "tipo": "Neossolo Flúvico",
+      "textura": "franco-arenosa",
+      "ph_medio": 6.8,
+      "aptidao": "feijão-caupi, capim buffel"
+    }
+  ]
+}
