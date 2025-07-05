@@ -19,8 +19,8 @@
             Nitrogênio (kg/ha)
             <span class="info-icon" title="Valor ideal: 20-50 kg/ha para maioria das culturas">i</span>
           </label>
-          <input type="number" id="nitrogenio" name="nitrogenio" placeholder="Ex: 25" min="0" max="80" required />
-          <span class="input-hint">Faixa: 0-80 kg/ha</span>
+          <input type="number" id="nitrogenio" name="nitrogenio" placeholder="Ex: 25" min="0" max="500" required />
+          <span class="input-hint">Faixa: 0-500 kg/ha</span>
         </div>
 
         <div class="form-group">
@@ -28,8 +28,8 @@
             Fósforo (kg/ha)
             <span class="info-icon" title="Valor ideal: 15-40 kg/ha para grãos">i</span>
           </label>
-          <input type="number" id="fosforo" name="fosforo" placeholder="Ex: 15" min="0" max="80" required />
-          <span class="input-hint">Faixa: 0-80 kg/ha</span>
+          <input type="number" id="fosforo" name="fosforo" placeholder="Ex: 15" min="0" max="500" required />
+          <span class="input-hint">Faixa: 0-500 kg/ha</span>
         </div>
 
         <div class="form-group">
@@ -37,8 +37,8 @@
             Potássio (kg/ha)
             <span class="info-icon" title="Valor ideal: 40-80 kg/ha para frutíferas">i</span>
           </label>
-          <input type="number" id="potassio" name="potassio" placeholder="Ex: 50" min="0" max="80" required />
-          <span class="input-hint">Faixa: 0-80 kg/ha</span>
+          <input type="number" id="potassio" name="potassio" placeholder="Ex: 50" min="0" max="500" required />
+          <span class="input-hint">Faixa: 0-500 kg/ha</span>
         </div>
 
         <div class="form-group">
@@ -64,8 +64,8 @@
             pH do Solo
             <span class="info-icon" title="Escala de 0 (ácido) a 14 (alcalino)">i</span>
           </label>
-          <input type="text" id="ph" name="ph" placeholder="Ex: 6,50" required />
-          <span class="input-hint">Escala: 0 (ácido) a 14 (alcalino)</span>
+          <input type="text" id="ph" name="ph" placeholder="Ex: 6,5" required />
+          <span class="input-hint">Escala: 5,0 a 14,0 (1-2 casas decimais)</span>
         </div>
       </div>
 
@@ -74,9 +74,11 @@
           Precipitação (mm/mês)
           <span class="info-icon" title="Média mensal de chuva na região">i</span>
         </label>
-        <input type="text" id="chuva" name="chuva" placeholder="Ex: 120,000" required />
-        <span class="input-hint">Formato: 000,000</span>
+        <input type="text" id="chuva" name="chuva" placeholder="Ex: 120,00" required />
+        <span class="input-hint">Formato: 000,00</span>
       </div>
+
+      
 
       <div class="form-group">
         <label for="regiao">
@@ -113,6 +115,7 @@
           <th>N (kg/ha)</th>
           <th>P (kg/ha)</th>
           <th>K (kg/ha)</th>
+          <th>Precipitação (mm/mês)</th>
         </tr>
       </thead>
       <tbody>
@@ -122,6 +125,7 @@
           <td>20-40</td>
           <td>15-30</td>
           <td>30-60</td>
+          <td>100-200</td>
         </tr>
         <tr>
           <td>Milho</td>
@@ -129,6 +133,7 @@
           <td>30-50</td>
           <td>20-40</td>
           <td>40-80</td>
+          <td>80-150</td>
         </tr>
         <tr>
           <td>Café</td>
@@ -136,6 +141,7 @@
           <td>30-50</td>
           <td>20-40</td>
           <td>40-70</td>
+          <td>100-180</td>
         </tr>
         <tr>
           <td>Feijão</td>
@@ -143,6 +149,15 @@
           <td>15-30</td>
           <td>10-25</td>
           <td>20-50</td>
+          <td>60-120</td>
+        </tr>
+        <tr>
+          <td>Trigo</td>
+          <td>6.0-7.0</td>
+          <td>30-50</td>
+          <td>15-30</td>
+          <td>30-60</td>
+          <td>50-100</td>
         </tr>
       </tbody>
     </table>
@@ -154,176 +169,57 @@
   </div>
 
   <script>
-    const dadosBiomas = {
-      "Amazônia": {
-        "bioma": "Amazônia",
-        "caracteristicas": {
-          "area_km2": 5500000,
-          "precipitacao_mm_ano": 2500,
-          "temperatura_media_c": 26
-        },
-        "solos": [
-          {
-            "tipo": "Latossolo Amarelo",
-            "textura": "argilosa",
-            "ph_medio": 4.5,
-            "materia_organica_percent": 3.2,
-            "nutrientes_kg_ha": {
-              "N": 12,
-              "P": 8,
-              "K": 25
-            },
-            "aptidao": "cacau, açaí, guaraná, pupunha"
-          },
-          {
-            "tipo": "Argissolo",
-            "textura": "franco-arenosa",
-            "ph_medio": 5.2,
-            "aptidao": "mandioca, banana, cupuaçu"
-          }
-        ]
-      },
-      "Cerrado": {
-        "bioma": "Cerrado",
-        "caracteristicas": {
-          "area_km2": 2040000,
-          "precipitacao_mm_ano": 1500,
-          "temperatura_media_c": 24
-        },
-        "solos": [
-          {
-            "tipo": "Latossolo Vermelho",
-            "textura": "média",
-            "ph_medio": 5.8,
-            "materia_organica_percent": 2.5,
-            "nutrientes_kg_ha": {
-              "N": 15,
-              "P": 12,
-              "K": 35
-            },
-            "aptidao": "soja, milho, algodão, sorgo"
-          },
-          {
-            "tipo": "Neossolo Quartzarênico",
-            "textura": "arenosa",
-            "ph_medio": 6.2,
-            "aptidao": "pastagens, eucalipto"
-          }
-        ]
-      },
-      "Mata Atlântica": {
-        "bioma": "Mata Atlântica",
-        "caracteristicas": {
-          "area_km2": 1116000,
-          "precipitacao_mm_ano": 1800,
-          "temperatura_media_c": 22
-        },
-        "solos": [
-          {
-            "tipo": "Terra Roxa",
-            "textura": "argilosa",
-            "ph_medio": 6.0,
-            "materia_organica_percent": 3.8,
-            "nutrientes_kg_ha": {
-              "N": 18,
-              "P": 15,
-              "K": 45
-            },
-            "aptidao": "café, cana-de-açúcar, eucalipto"
-          },
-          {
-            "tipo": "Cambissolo",
-            "textura": "franco",
-            "ph_medio": 5.5,
-            "aptidao": "banana, citrus, hortaliças"
-          }
-        ]
-      },
-      "Caatinga": {
-        "bioma": "Caatinga",
-        "caracteristicas": {
-          "area_km2": 844453,
-          "precipitacao_mm_ano": 600,
-          "temperatura_media_c": 28
-        },
-        "solos": [
-          {
-            "tipo": "Luvissolo",
-            "textura": "argilosa",
-            "ph_medio": 7.2,
-            "materia_organica_percent": 0.8,
-            "nutrientes_kg_ha": {
-              "N": 8,
-              "P": 5,
-              "K": 18
-            },
-            "aptidao": "manga, uva irrigada"
-          },
-          {
-            "tipo": "Neossolo Flúvico",
-            "textura": "franco-arenosa",
-            "ph_medio": 6.8,
-            "aptidao": "feijão-caupi, capim buffel"
-          }
-        ]
-      },
-      "Pampa": {
-        "bioma": "Pampa",
-        "caracteristicas": {
-          "area_km2": 176496,
-          "precipitacao_mm_ano": 1200,
-          "temperatura_media_c": 18
-        },
-        "solos": [
-          {
-            "tipo": "Planossolo",
-            "textura": "média",
-            "ph_medio": 6.5,
-            "materia_organica_percent": 3.0,
-            "nutrientes_kg_ha": {
-              "N": 20,
-              "P": 18,
-              "K": 50
-            },
-            "aptidao": "arroz, trigo, soja, pastagens"
-          },
-          {
-            "tipo": "Chernossolo",
-            "textura": "franco-argilosa",
-            "ph_medio": 6.8,
-            "aptidao": "vinhas, frutíferas temperadas"
-          }
-        ]
-      },
-      "Pantanal": {
-        "bioma": "Pantanal",
-        "caracteristicas": {
-          "area_km2": 150355,
-          "precipitacao_mm_ano": 1300,
-          "temperatura_media_c": 26
-        },
-        "solos": [
-          {
-            "tipo": "Gleissolo",
-            "textura": "argilosa",
-            "ph_medio": 6.2,
-            "materia_organica_percent": 4.5,
-            "nutrientes_kg_ha": {
-              "N": 25,
-              "P": 20,
-              "K": 60
-            },
-            "aptidao": "arroz, pecuária, pesca"
-          },
-          {
-            "tipo": "Neossolo Flúvico",
-            "textura": "franco",
-            "ph_medio": 6.5,
-            "aptidao": "capim nativo, pastagens"
-          }
-        ]
+    // Variável para armazenar os dados dos biomas carregados dos arquivos JSON
+    let dadosBiomas = {};
+    let todasCulturas = new Set();
+
+    // Função para carregar os dados dos arquivos JSON
+    async function carregarDadosBiomas() {
+      const arquivos = [
+        'dados/amaz.json',
+        'dados/caatinga.json',
+        'dados/cerrado.json',
+        'dados/mataatlant.json',
+        'dados/pampa.json',
+        'dados/pantanal.json',
+        'dados/texturasolo.json'
+      ];
+
+      try {
+        const promises = arquivos.map(arquivo => 
+          fetch(arquivo)
+            .then(response => response.json())
+            .then(data => {
+              const nomeBioma = arquivo.split('/')[1].replace('.json', '');
+              if (nomeBioma !== 'texturasolo') {
+                dadosBiomas[data.bioma] = data;
+                
+                // Coletar todas as culturas disponíveis
+                data.solos.forEach(solo => {
+                  if (solo.aptidao) {
+                    solo.aptidao.split(', ').forEach(cultura => {
+                      todasCulturas.add(cultura);
+                    });
+                  }
+                });
+              }
+              return data;
+            })
+        );
+
+        await Promise.all(promises);
+        
+        // Preencher o dropdown de culturas
+        const culturaSelect = document.getElementById('cultura');
+        todasCulturas.forEach(cultura => {
+          culturaSelect.innerHTML += `<option value="${cultura}">${cultura}</option>`;
+        });
+        
+        console.log('Dados dos biomas carregados com sucesso:', dadosBiomas);
+      } catch (error) {
+        console.error('Erro ao carregar os dados dos biomas:', error);
       }
-    };
+    }
 
     // Dados de textura do solo
     const texturasSolo = {
@@ -383,6 +279,85 @@
       ]
     };
 
+    // Dados de culturas agrícolas
+    const culturasDados = {
+      "Soja": {
+        "ph_min": 6.0,
+        "ph_max": 7.0,
+        "n_min": 20,
+        "n_max": 40,
+        "p_min": 15,
+        "p_max": 30,
+        "k_min": 30,
+        "k_max": 60,
+        "precipitacao_min": 100,
+        "precipitacao_max": 200,
+        "temperatura_min": 20,
+        "temperatura_max": 30,
+        "biomas": ["Cerrado", "Pampa", "Pantanal"]
+      },
+      "Milho": {
+        "ph_min": 5.8,
+        "ph_max": 7.0,
+        "n_min": 30,
+        "n_max": 50,
+        "p_min": 20,
+        "p_max": 40,
+        "k_min": 40,
+        "k_max": 80,
+        "precipitacao_min": 80,
+        "precipitacao_max": 150,
+        "temperatura_min": 18,
+        "temperatura_max": 32,
+        "biomas": ["Cerrado", "Mata Atlântica", "Pampa"]
+      },
+      "Café": {
+        "ph_min": 5.5,
+        "ph_max": 6.5,
+        "n_min": 30,
+        "n_max": 50,
+        "p_min": 20,
+        "p_max": 40,
+        "k_min": 40,
+        "k_max": 70,
+        "precipitacao_min": 100,
+        "precipitacao_max": 180,
+        "temperatura_min": 18,
+        "temperatura_max": 24,
+        "biomas": ["Mata Atlântica", "Cerrado"]
+      },
+      "Feijão": {
+        "ph_min": 5.8,
+        "ph_max": 6.5,
+        "n_min": 15,
+        "n_max": 30,
+        "p_min": 10,
+        "p_max": 25,
+        "k_min": 20,
+        "k_max": 50,
+        "precipitacao_min": 60,
+        "precipitacao_max": 120,
+        "temperatura_min": 16,
+        "temperatura_max": 30,
+        "biomas": ["Cerrado", "Mata Atlântica", "Caatinga"]
+      },
+      "Trigo": {
+        "ph_min": 6.0,
+        "ph_max": 7.0,
+        "n_min": 30,
+        "n_max": 50,
+        "p_min": 15,
+        "p_max": 30,
+        "k_min": 30,
+        "k_max": 60,
+        "precipitacao_min": 50,
+        "precipitacao_max": 100,
+        "temperatura_min": 10,
+        "temperatura_max": 24,
+        "biomas": ["Pampa"]
+      }
+    };
+
     function getDadosBioma(bioma) {
       if (!bioma || !dadosBiomas[bioma]) return null;
       return dadosBiomas[bioma];
@@ -390,6 +365,79 @@
 
     function getTexturaSolo(tipoTextura) {
       return texturasSolo.texturas.find(textura => textura.tipo === tipoTextura) || null;
+    }
+
+    function aplicarMascaraPH(campoId) {
+      const campo = document.getElementById(campoId);
+      
+      campo.addEventListener('input', function(e) {
+        let valor = this.value.replace(/[^\d,]/g, '');
+        
+        const partes = valor.split(',');
+        if (partes.length > 2) {
+          valor = partes[0] + ',' + partes[1];
+        }
+        
+        if (partes[0] && partes[0].length > 2) {
+          partes[0] = partes[0].substring(0, 2);
+          valor = partes[0] + (partes[1] ? ',' + partes[1] : '');
+        }
+        
+        if (partes[1] && partes[1].length > 2) {
+          partes[1] = partes[1].substring(0, 2);
+          valor = partes[0] + ',' + partes[1];
+        }
+        
+        this.value = valor;
+      });
+      
+      campo.addEventListener('blur', function() {
+        let valor = this.value;
+        
+        if (valor && !valor.includes(',')) {
+          this.value = valor + ',0';
+        }
+        else if (valor.endsWith(',')) {
+          this.value = valor + '0';
+        }
+        else if (valor.includes(',') && valor.split(',')[1].length === 1) {
+          this.value = valor + '0';
+        }
+        
+        validarCampoPH(this);
+      });
+    }
+
+    function validarCampoPH(campo) {
+      const valorStr = campo.value.replace(',', '.');
+      const valor = parseFloat(valorStr);
+      
+      if (isNaN(valor)) {
+        campo.classList.add("erro-validacao");
+        campo.classList.remove("sucesso-validacao");
+        return false;
+      }
+      
+      if (valor < 5 || valor > 14) {
+        campo.classList.add("erro-validacao");
+        campo.classList.remove("sucesso-validacao");
+        return false;
+      }
+      
+      const partes = valorStr.split('.');
+      const parteInteira = partes[0];
+      let parteDecimal = partes[1] || '0';
+      
+      if (parteDecimal.length > 2) {
+        parteDecimal = parteDecimal.substring(0, 2);
+      } else if (parteDecimal.length === 1) {
+        parteDecimal = parteDecimal + '0';
+      }
+      
+      campo.value = parteInteira + ',' + parteDecimal;
+      campo.classList.remove("erro-validacao");
+      campo.classList.add("sucesso-validacao");
+      return true;
     }
 
     function aplicarMascaraComVirgula(campoId, maxValor) {
@@ -412,14 +460,14 @@
       const campo = document.getElementById(campoId);
       campo.addEventListener('input', function() {
         let valor = campo.value.replace(/[^\d]/g, '');
-        if (valor.length > 6) valor = valor.slice(0, 6);
+        if (valor.length > 5) valor = valor.slice(0, 5);
 
-        while (valor.length < 4) {
+        while (valor.length < 3) {
           valor = '0' + valor;
         }
 
-        let parteInteira = valor.slice(0, valor.length - 3);
-        let parteDecimal = valor.slice(-3);
+        let parteInteira = valor.slice(0, valor.length - 2);
+        let parteDecimal = valor.slice(-2);
         campo.value = `${parseInt(parteInteira)},${parteDecimal}`;
         validarCampo(campo);
       });
@@ -449,13 +497,13 @@
     function validarDadosAgricolas(dados) {
       const erros = [];
       
-      if (dados.nitrogenio > 80 || dados.nitrogenio < 0) erros.push("Nitrogênio fora da faixa (0-80 kg/ha)");
-      if (dados.fosforo > 80 || dados.fosforo < 0) erros.push("Fósforo fora da faixa (0-80 kg/ha)");
-      if (dados.potassio > 80 || dados.potassio < 0) erros.push("Potássio fora da faixa (0-80 kg/ha)");
+      if (dados.nitrogenio > 500 || dados.nitrogenio < 0) erros.push("Nitrogênio fora da faixa (0-500 kg/ha)");
+      if (dados.fosforo > 500 || dados.fosforo < 0) erros.push("Fósforo fora da faixa (0-500 kg/ha)");
+      if (dados.potassio > 500 || dados.potassio < 0) erros.push("Potássio fora da faixa (0-500 kg/ha)");
       if (dados.temperatura > 80 || dados.temperatura < -25) erros.push("Temperatura fora da faixa (-25°C a 80°C)");
       
       const ph = parseFloat(dados.ph.replace(',', '.'));
-      if (ph < 0 || ph > 14) erros.push("pH inválido (deve estar entre 0 e 14)");
+      if (isNaN(ph) || ph < 5 || ph > 14) erros.push("pH inválido (deve estar entre 5,0 e 14,0)");
       
       const umidade = parseFloat(dados.umidade.replace(',', '.'));
       if (umidade < 0 || umidade > 100) erros.push("Umidade deve ser entre 0% e 100%");
@@ -466,7 +514,6 @@
     }
 
     function calcularCalagem(phAtual, phDesejado, textura) {
-      // Fatores de correção baseados na textura do solo
       const fatoresTextura = {
         "arenosa": 0.5,
         "franco-arenosa": 0.7,
@@ -496,7 +543,6 @@
         "Pantanal": ["Arroz", "Pecuária", "Piscicultura", "Capim", "Pastagens"]
       };
       
-      // Filtra culturas baseadas no pH
       const phMinMax = {
         "Cacau": [5.0, 6.5],
         "Açaí": [4.5, 6.5],
@@ -505,12 +551,10 @@
         "Café": [5.5, 6.5],
         "Manga": [5.5, 7.5],
         "Arroz": [5.0, 7.0],
-        // Adicione mais culturas conforme necessário
       };
       
       let culturasDisponiveis = culturasBase[bioma] || [];
       
-      // Ordena por compatibilidade com pH
       culturasDisponiveis.sort((a, b) => {
         const aPh = phMinMax[a] || [5.0, 7.0];
         const bPh = phMinMax[b] || [5.0, 7.0];
@@ -528,6 +572,69 @@
       };
     }
 
+    function analisarCulturaDesejada(cultura, dados) {
+      if (!cultura || !culturasDados[cultura]) return null;
+      
+      const culturaInfo = culturasDados[cultura];
+      const ph = parseFloat(dados.ph.replace(',', '.'));
+      const chuva = parseFloat(dados.chuva.replace(',', '.'));
+      const temperatura = dados.temperatura;
+      const bioma = dados.regiao;
+      
+      const problemas = [];
+      const recomendacoes = [];
+      
+      if (ph < culturaInfo.ph_min) {
+        problemas.push(`pH muito baixo (${ph.toFixed(1)} < ${culturaInfo.ph_min})`);
+        recomendacoes.push(`Aplicar calcário para elevar o pH para ${culturaInfo.ph_min}-${culturaInfo.ph_max}`);
+      } else if (ph > culturaInfo.ph_max) {
+        problemas.push(`pH muito alto (${ph.toFixed(1)} > ${culturaInfo.ph_max})`);
+        recomendacoes.push(`Aplicar gesso agrícola ou enxofre para reduzir o pH para ${culturaInfo.ph_min}-${culturaInfo.ph_max}`);
+      }
+      
+      if (dados.nitrogenio < culturaInfo.n_min) {
+        problemas.push(`Nitrogênio insuficiente (${dados.nitrogenio} < ${culturaInfo.n_min} kg/ha)`);
+        recomendacoes.push(`Adubação nitrogenada recomendada: ${culturaInfo.n_min-dados.nitrogenio} kg/ha de N`);
+      }
+      
+      if (dados.fosforo < culturaInfo.p_min) {
+        problemas.push(`Fósforo insuficiente (${dados.fosforo} < ${culturaInfo.p_min} kg/ha)`);
+        recomendacoes.push(`Adubação fosfatada recomendada: ${culturaInfo.p_min-dados.fosforo} kg/ha de P2O5`);
+      }
+      
+      if (dados.potassio < culturaInfo.k_min) {
+        problemas.push(`Potássio insuficiente (${dados.potassio} < ${culturaInfo.k_min} kg/ha)`);
+        recomendacoes.push(`Adubação potássica recomendada: ${culturaInfo.k_min-dados.potassio} kg/ha de K2O`);
+      }
+      
+      if (chuva < culturaInfo.precipitacao_min) {
+        problemas.push(`Precipitação insuficiente (${chuva.toFixed(0)} < ${culturaInfo.precipitacao_min} mm/mês)`);
+        recomendacoes.push(`Irrigação complementar necessária (${culturaInfo.precipitacao_min-chuva} mm/mês)`);
+      } else if (chuva > culturaInfo.precipitacao_max) {
+        problemas.push(`Precipitação excessiva (${chuva.toFixed(0)} > ${culturaInfo.precipitacao_max} mm/mês)`);
+        recomendacoes.push(`Sistema de drenagem recomendado`);
+      }
+      
+      if (temperatura < culturaInfo.temperatura_min) {
+        problemas.push(`Temperatura muito baixa (${temperatura} < ${culturaInfo.temperatura_min}°C)`);
+        recomendacoes.push(`Plantio em estufa ou esperar época mais quente`);
+      } else if (temperatura > culturaInfo.temperatura_max) {
+        problemas.push(`Temperatura muito alta (${temperatura} > ${culturaInfo.temperatura_max}°C)`);
+        recomendacoes.push(`Plantio em sombra ou esperar época mais fria`);
+      }
+      
+      if (!culturaInfo.biomas.includes(bioma)) {
+        problemas.push(`Bioma não ideal (${bioma})`);
+        recomendacoes.push(`Considerar cultivo protegido ou escolher variedade adaptada`);
+      }
+      
+      return {
+        viavel: problemas.length === 0,
+        problemas: problemas,
+        recomendacoes: recomendacoes
+      };
+    }
+
     async function processarFormulario(event) {
       event.preventDefault();
 
@@ -539,6 +646,7 @@
         umidade: document.getElementById('umidade').value,
         ph: document.getElementById('ph').value,
         chuva: document.getElementById('chuva').value,
+        cultura: document.getElementById('cultura').value,
         regiao: document.getElementById('regiao').value
       };
 
@@ -562,7 +670,6 @@
         </div>
       `;
 
-      // Simulamos um delay para parecer que está processando
       setTimeout(() => {
         try {
           const dadosBioma = getDadosBioma(dados.regiao);
@@ -570,10 +677,8 @@
           const umidade = parseFloat(dados.umidade.replace(',', '.'));
           const chuva = parseFloat(dados.chuva.replace(',', '.'));
           
-          // Determina o solo mais adequado baseado nos dados
           let soloPrincipal = dadosBioma?.solos?.[0] || {};
           if (dadosBioma?.solos?.length > 1) {
-            // Tenta encontrar o solo com pH mais próximo do informado
             soloPrincipal = dadosBioma.solos.reduce((prev, curr) => {
               const prevDiff = Math.abs((prev.ph_medio || 6.0) - ph);
               const currDiff = Math.abs((curr.ph_medio || 6.0) - ph);
@@ -583,10 +688,8 @@
           
           const texturaSolo = getTexturaSolo(soloPrincipal.textura);
           
-          // Gera recomendações
           const recomendacoes = [];
           
-          // Calagem
           if (ph < 5.5) {
             const phDesejado = 6.0;
             const calcario = calcularCalagem(ph, phDesejado, soloPrincipal.textura);
@@ -595,39 +698,33 @@
             recomendacoes.push("Solo alcalino, considerar aplicação de gesso agrícola (1-2 ton/ha) para reduzir sódio");
           }
           
-          // Adubação nitrogenada
           const N = calcularAdubacaoNutriente(dados.nitrogenio, 30, 1.5);
           if (N > 0) {
             recomendacoes.push(`Adubação nitrogenada: ${N} kg/ha de N (uréia: ${Math.round(N/0.45)} kg/ha)`);
           }
           
-          // Adubação fosfatada
           const P = calcularAdubacaoNutriente(dados.fosforo, 20, 1.8);
           if (P > 0) {
             recomendacoes.push(`Adubação fosfatada: ${P} kg/ha de P2O5 (superfosfato simples: ${Math.round(P/0.18)} kg/ha)`);
           }
           
-          // Adubação potássica
           const K = calcularAdubacaoNutriente(dados.potassio, 50, 1.2);
           if (K > 0) {
             recomendacoes.push(`Adubação potássica: ${K} kg/ha de K2O (cloreto de potássio: ${Math.round(K/0.60)} kg/ha)`);
           }
           
-          // Manejo de umidade
           if (umidade < 40) {
             recomendacoes.push("Solo com baixa umidade, considerar irrigação complementar (20-30mm/semana)");
           } else if (umidade > 80) {
             recomendacoes.push("Solo com excesso de umidade, avaliar drenagem (valas ou camalhões)");
           }
           
-          // Culturas recomendadas
           const culturas = getCulturasRecomendadas(dados.regiao, ph, {
             N: dados.nitrogenio,
             P: dados.fosforo,
             K: dados.potassio
           });
           
-          // Época de plantio
           let epocaPlantio = "Durante a estação chuvosa";
           if (dados.temperatura > 25) {
             epocaPlantio = "No início das chuvas (outubro/novembro)";
@@ -635,9 +732,42 @@
             epocaPlantio = "Na primavera (setembro/outubro)";
           }
           
-          // Monta a resposta
+          let analiseCulturaHTML = '';
+          if (dados.cultura && culturasDados[dados.cultura]) {
+            const analise = analisarCulturaDesejada(dados.cultura, dados);
+            
+            analiseCulturaHTML = `
+              <h3>Análise para Cultura: ${dados.cultura}</h3>
+              <div style="background-color:${analise.viavel ? '#e6f7e6' : '#fff3f3'};padding:1em;border-radius:6px;margin-bottom:1em;">
+                <p><strong>Viabilidade:</strong> <span class="${analise.viavel ? 'badge-success' : 'badge-error'}">${analise.viavel ? 'VIÁVEL' : 'NÃO VIÁVEL'}</span></p>
+                
+                ${analise.problemas.length > 0 ? `
+                  <h4>Problemas identificados:</h4>
+                  <ul>
+                    ${analise.problemas.map(p => `<li>${p}</li>`).join('')}
+                  </ul>
+                ` : '<p>Nenhum problema crítico identificado.</p>'}
+                
+                ${analise.recomendacoes.length > 0 ? `
+                  <h4>Recomendações para cultivo:</h4>
+                  <ul>
+                    ${analise.recomendacoes.map(r => `<li>${r}</li>`).join('')}
+                  </ul>
+                ` : ''}
+              </div>
+            `;
+          } else if (dados.cultura) {
+            analiseCulturaHTML = `
+              <div style="background-color:#fff3f3;padding:1em;border-radius:6px;margin-bottom:1em;">
+                <p><strong>Atenção:</strong> A cultura "${dados.cultura}" não está em nosso banco de dados. As recomendações abaixo são gerais.</p>
+              </div>
+            `;
+          }
+          
           let respostaHTML = `
             <div class="diagnostico-container">
+              ${analiseCulturaHTML}
+              
               <h3>1. Diagnóstico do Solo</h3>
               <div class="diagnostico-grid">
                 <div class="diagnostico-col">
@@ -684,7 +814,6 @@
               <p>Recomenda-se aplicação de 5-10 ton/ha de composto orgânico para melhorar a estrutura do solo.</p>
           `;
           
-          // Adiciona informações do bioma se disponível
           if (dadosBioma) {
             respostaHTML += `
               <div class="bioma-info">
@@ -721,7 +850,6 @@
           
           conteudoResposta.innerHTML = respostaHTML;
 
-          // Botão de copiar
           conteudoResposta.innerHTML += `
             <div style="text-align:center;margin-top:2em;">
               <button id="btn-copiar" style="background:#0078D7;color:white;border:none;padding:0.5em 1em;border-radius:4px;cursor:pointer;font-size:0.9em;">
@@ -761,30 +889,33 @@
     }
 
     document.addEventListener('DOMContentLoaded', function() {
-      // Inicializa as máscaras e validações
+      // Carregar os dados dos biomas
+      carregarDadosBiomas();
+
       aplicarMascaraComVirgula('umidade', 100);
-      aplicarMascaraComVirgula('ph', 14);
+      aplicarMascaraPH('ph');
       mascaraChuva('chuva');
 
-      limitarValor('nitrogenio', 0, 80);
-      limitarValor('fosforo', 0, 80);
-      limitarValor('potassio', 0, 80);
+      limitarValor('nitrogenio', 0, 500);
+      limitarValor('fosforo', 0, 500);
+      limitarValor('potassio', 0, 500);
       limitarValor('temperatura', -25, 80);
 
-      // Validação ao sair do campo
       document.querySelectorAll('input, select').forEach(input => {
         input.addEventListener('blur', function() {
-          validarCampo(this);
+          if (input.id === 'ph') {
+            validarCampoPH(input);
+          } else {
+            validarCampo(input);
+          }
         });
       });
 
-      // Botão de ajuda
       document.getElementById('btn-ajuda').addEventListener('click', function() {
         const tabela = document.getElementById('tabela-referencia');
         tabela.style.display = tabela.style.display === 'none' ? 'table' : 'none';
       });
 
-      // Mostra informações do bioma selecionado
       document.getElementById('regiao').addEventListener('change', function() {
         const biomaSelecionado = this.value;
         const dados = getDadosBioma(biomaSelecionado);
