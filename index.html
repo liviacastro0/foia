@@ -64,7 +64,7 @@
             pH do Solo
             <span class="info-icon" title="Escala de 0 (ácido) a 14 (alcalino)">i</span>
           </label>
-          <input type="text" id="ph" name="ph" placeholder="Ex: 6,5" required />
+          <input type="text" id="ph" name="ph" placeholder="Ex: 5,00" required />
           <span class="input-hint">Escala: 5,0 a 14,0 (1-2 casas decimais)</span>
         </div>
       </div>
@@ -77,8 +77,6 @@
         <input type="text" id="chuva" name="chuva" placeholder="Ex: 120,00" required />
         <span class="input-hint">Formato: 000,00</span>
       </div>
-
-      
 
       <div class="form-group">
         <label for="regiao">
@@ -371,37 +369,40 @@
       const campo = document.getElementById(campoId);
       
       campo.addEventListener('input', function(e) {
-        let valor = this.value.replace(/[^\d,]/g, '');
+        let valor = this.value.replace(/[^\d]/g, '');
         
-        const partes = valor.split(',');
-        if (partes.length > 2) {
-          valor = partes[0] + ',' + partes[1];
+        // Se o valor for vazio, não faz nada
+        if (valor === '') return;
+        
+        // Garante que o valor não comece com zero (exceto se for zero mesmo)
+        if (valor.length > 1 && valor[0] === '0') {
+          valor = valor.substring(1);
         }
         
-        if (partes[0] && partes[0].length > 2) {
-          partes[0] = partes[0].substring(0, 2);
-          valor = partes[0] + (partes[1] ? ',' + partes[1] : '');
+        // Insere a vírgula automaticamente após o primeiro dígito
+        if (valor.length === 1) {
+          this.value = valor + ',';
+        } else if (valor.length > 1) {
+          const parteInteira = valor.substring(0, 1);
+          const parteDecimal = valor.substring(1, 3); // Limita a 2 casas decimais
+          this.value = parteInteira + ',' + parteDecimal;
         }
-        
-        if (partes[1] && partes[1].length > 2) {
-          partes[1] = partes[1].substring(0, 2);
-          valor = partes[0] + ',' + partes[1];
-        }
-        
-        this.value = valor;
       });
       
       campo.addEventListener('blur', function() {
         let valor = this.value;
         
-        if (valor && !valor.includes(',')) {
-          this.value = valor + ',0';
-        }
-        else if (valor.endsWith(',')) {
-          this.value = valor + '0';
-        }
-        else if (valor.includes(',') && valor.split(',')[1].length === 1) {
-          this.value = valor + '0';
+        // Completa com zeros se necessário
+        if (valor.includes(',')) {
+          const partes = valor.split(',');
+          if (partes[1].length === 0) {
+            this.value = partes[0] + ',00';
+          } else if (partes[1].length === 1) {
+            this.value = partes[0] + ',' + partes[1] + '0';
+          }
+        } else if (valor !== '') {
+          // Se não tiver vírgula mas tiver valor, adiciona ,00
+          this.value = valor + ',00';
         }
         
         validarCampoPH(this);
