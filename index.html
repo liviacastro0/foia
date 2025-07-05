@@ -6,7 +6,6 @@
   <link rel="icon" href="https://github.com/liviacastro0/imgs/blob/main/logo.png?raw=true" type="image/png">
   <link rel="stylesheet" href="style.css">
   <title>Análise de Solo Agrícola - IA Especializada</title>
-
 </head>
 
 <body>
@@ -155,88 +154,242 @@
   </div>
 
   <script>
-    let dadosBiomas = {
-      "Amazônia": { 
-        caracteristicas: { 
-          precipitacao_mm_ano: 2500,
-          temperatura_media: 26
-        }, 
-        solos: [{ 
-          textura: "argilosa", 
-          aptidao: "cacau, açaí, guaraná",
-          tipo: "Latossolo"
-        }] 
+    const dadosBiomas = {
+      "Amazônia": {
+        "bioma": "Amazônia",
+        "caracteristicas": {
+          "area_km2": 5500000,
+          "precipitacao_mm_ano": 2500,
+          "temperatura_media_c": 26
+        },
+        "solos": [
+          {
+            "tipo": "Latossolo Amarelo",
+            "textura": "argilosa",
+            "ph_medio": 4.5,
+            "materia_organica_percent": 3.2,
+            "nutrientes_kg_ha": {
+              "N": 12,
+              "P": 8,
+              "K": 25
+            },
+            "aptidao": "cacau, açaí, guaraná, pupunha"
+          },
+          {
+            "tipo": "Argissolo",
+            "textura": "franco-arenosa",
+            "ph_medio": 5.2,
+            "aptidao": "mandioca, banana, cupuaçu"
+          }
+        ]
       },
-      "Cerrado": { 
-        caracteristicas: { 
-          precipitacao_mm_ano: 1500,
-          temperatura_media: 24
-        }, 
-        solos: [{ 
-          textura: "média", 
-          aptidao: "soja, milho, algodão",
-          tipo: "Latossolo vermelho"
-        }] 
+      "Cerrado": {
+        "bioma": "Cerrado",
+        "caracteristicas": {
+          "area_km2": 2040000,
+          "precipitacao_mm_ano": 1500,
+          "temperatura_media_c": 24
+        },
+        "solos": [
+          {
+            "tipo": "Latossolo Vermelho",
+            "textura": "média",
+            "ph_medio": 5.8,
+            "materia_organica_percent": 2.5,
+            "nutrientes_kg_ha": {
+              "N": 15,
+              "P": 12,
+              "K": 35
+            },
+            "aptidao": "soja, milho, algodão, sorgo"
+          },
+          {
+            "tipo": "Neossolo Quartzarênico",
+            "textura": "arenosa",
+            "ph_medio": 6.2,
+            "aptidao": "pastagens, eucalipto"
+          }
+        ]
       },
-      "Mata Atlântica": { 
-        caracteristicas: { 
-          precipitacao_mm_ano: 1800,
-          temperatura_media: 22
-        }, 
-        solos: [{ 
-          textura: "argilosa", 
-          aptidao: "café, cana-de-açúcar, eucalipto",
-          tipo: "Terra roxa"
-        }] 
+      "Mata Atlântica": {
+        "bioma": "Mata Atlântica",
+        "caracteristicas": {
+          "area_km2": 1116000,
+          "precipitacao_mm_ano": 1800,
+          "temperatura_media_c": 22
+        },
+        "solos": [
+          {
+            "tipo": "Terra Roxa",
+            "textura": "argilosa",
+            "ph_medio": 6.0,
+            "materia_organica_percent": 3.8,
+            "nutrientes_kg_ha": {
+              "N": 18,
+              "P": 15,
+              "K": 45
+            },
+            "aptidao": "café, cana-de-açúcar, eucalipto"
+          },
+          {
+            "tipo": "Cambissolo",
+            "textura": "franco",
+            "ph_medio": 5.5,
+            "aptidao": "banana, citrus, hortaliças"
+          }
+        ]
       },
-      "Caatinga": { 
-        caracteristicas: { 
-          precipitacao_mm_ano: 600,
-          temperatura_media: 28
-        }, 
-        solos: [{ 
-          textura: "arenosa", 
-          aptidao: "manga, uva irrigada, caju",
-          tipo: "Neossolo"
-        }] 
+      "Caatinga": {
+        "bioma": "Caatinga",
+        "caracteristicas": {
+          "area_km2": 844453,
+          "precipitacao_mm_ano": 600,
+          "temperatura_media_c": 28
+        },
+        "solos": [
+          {
+            "tipo": "Luvissolo",
+            "textura": "argilosa",
+            "ph_medio": 7.2,
+            "materia_organica_percent": 0.8,
+            "nutrientes_kg_ha": {
+              "N": 8,
+              "P": 5,
+              "K": 18
+            },
+            "aptidao": "manga, uva irrigada"
+          },
+          {
+            "tipo": "Neossolo Flúvico",
+            "textura": "franco-arenosa",
+            "ph_medio": 6.8,
+            "aptidao": "feijão-caupi, capim buffel"
+          }
+        ]
       },
-      "Pampa": { 
-        caracteristicas: { 
-          precipitacao_mm_ano: 1200,
-          temperatura_media: 18
-        }, 
-        solos: [{ 
-          textura: "média", 
-          aptidao: "arroz, trigo, soja",
-          tipo: "Planossolo"
-        }] 
+      "Pampa": {
+        "bioma": "Pampa",
+        "caracteristicas": {
+          "area_km2": 176496,
+          "precipitacao_mm_ano": 1200,
+          "temperatura_media_c": 18
+        },
+        "solos": [
+          {
+            "tipo": "Planossolo",
+            "textura": "média",
+            "ph_medio": 6.5,
+            "materia_organica_percent": 3.0,
+            "nutrientes_kg_ha": {
+              "N": 20,
+              "P": 18,
+              "K": 50
+            },
+            "aptidao": "arroz, trigo, soja, pastagens"
+          },
+          {
+            "tipo": "Chernossolo",
+            "textura": "franco-argilosa",
+            "ph_medio": 6.8,
+            "aptidao": "vinhas, frutíferas temperadas"
+          }
+        ]
       },
-      "Pantanal": { 
-        caracteristicas: { 
-          precipitacao_mm_ano: 1300,
-          temperatura_media: 26
-        }, 
-        solos: [{ 
-          textura: "argilosa", 
-          aptidao: "arroz, pecuária, pesca",
-          tipo: "Gleissolo"
-        }] 
+      "Pantanal": {
+        "bioma": "Pantanal",
+        "caracteristicas": {
+          "area_km2": 150355,
+          "precipitacao_mm_ano": 1300,
+          "temperatura_media_c": 26
+        },
+        "solos": [
+          {
+            "tipo": "Gleissolo",
+            "textura": "argilosa",
+            "ph_medio": 6.2,
+            "materia_organica_percent": 4.5,
+            "nutrientes_kg_ha": {
+              "N": 25,
+              "P": 20,
+              "K": 60
+            },
+            "aptidao": "arroz, pecuária, pesca"
+          },
+          {
+            "tipo": "Neossolo Flúvico",
+            "textura": "franco",
+            "ph_medio": 6.5,
+            "aptidao": "capim nativo, pastagens"
+          }
+        ]
       }
+    };
+
+    // Dados de textura do solo
+    const texturasSolo = {
+      "texturas": [
+        {
+          "tipo": "arenosa",
+          "composicao": {
+            "areia_percent": 85,
+            "silte_percent": 10,
+            "argila_percent": 5
+          },
+          "caracteristicas": {
+            "retencao_agua": "baixa",
+            "aereacao": "alta",
+            "fertilidade": "baixa"
+          }
+        },
+        {
+          "tipo": "franco-arenosa",
+          "composicao": {
+            "areia_percent": 65,
+            "silte_percent": 20,
+            "argila_percent": 15
+          },
+          "caracteristicas": {
+            "retencao_agua": "média",
+            "aereacao": "média",
+            "fertilidade": "média"
+          }
+        },
+        {
+          "tipo": "franco",
+          "composicao": {
+            "areia_percent": 40,
+            "silte_percent": 40,
+            "argila_percent": 20
+          },
+          "caracteristicas": {
+            "retencao_agua": "boa",
+            "aereacao": "boa",
+            "fertilidade": "alta"
+          }
+        },
+        {
+          "tipo": "argilosa",
+          "composicao": {
+            "areia_percent": 20,
+            "silte_percent": 30,
+            "argila_percent": 50
+          },
+          "caracteristicas": {
+            "retencao_agua": "alta",
+            "aereacao": "baixa",
+            "fertilidade": "média a alta"
+          }
+        }
+      ]
     };
 
     function getDadosBioma(bioma) {
       if (!bioma || !dadosBiomas[bioma]) return null;
-      
-      const dados = dadosBiomas[bioma];
-      const soloPrincipal = dados.solos && dados.solos.length > 0 ? dados.solos[0] : {};
-      
-      return {
-        textura: soloPrincipal.textura || 'não especificada',
-        precipitacao: dados.caracteristicas?.precipitacao_mm_ano || 'não especificada',
-        aptidao: soloPrincipal.aptidao || 'não especificada',
-        tipoSolo: soloPrincipal.tipo || 'não especificado',
-        temperatura: dados.caracteristicas?.temperatura_media || 'não especificada'
-      };
+      return dadosBiomas[bioma];
+    }
+
+    function getTexturaSolo(tipoTextura) {
+      return texturasSolo.texturas.find(textura => textura.tipo === tipoTextura) || null;
     }
 
     function aplicarMascaraComVirgula(campoId, maxValor) {
@@ -312,6 +465,69 @@
       return erros;
     }
 
+    function calcularCalagem(phAtual, phDesejado, textura) {
+      // Fatores de correção baseados na textura do solo
+      const fatoresTextura = {
+        "arenosa": 0.5,
+        "franco-arenosa": 0.7,
+        "franco": 1.0,
+        "argilosa": 1.3
+      };
+      
+      const fator = fatoresTextura[textura] || 1.0;
+      const necessidade = (phDesejado - phAtual) * 2000 * fator;
+      
+      return Math.max(0, Math.round(necessidade));
+    }
+
+    function calcularAdubacaoNutriente(nutrienteAtual, nutrienteIdeal, fatorConversao = 1.0) {
+      const deficiencia = nutrienteIdeal - nutrienteAtual;
+      if (deficiencia <= 0) return 0;
+      return Math.round(deficiencia * fatorConversao);
+    }
+
+    function getCulturasRecomendadas(bioma, ph, nutrientes) {
+      const culturasBase = {
+        "Amazônia": ["Cacau", "Açaí", "Guaraná", "Pupunha", "Mandioca"],
+        "Cerrado": ["Soja", "Milho", "Algodão", "Sorgo", "Feijão"],
+        "Mata Atlântica": ["Café", "Cana-de-açúcar", "Eucalipto", "Banana", "Citrus"],
+        "Caatinga": ["Manga", "Uva irrigada", "Caju", "Goiaba", "Feijão-caupi"],
+        "Pampa": ["Arroz", "Trigo", "Soja", "Pastagens", "Videiras"],
+        "Pantanal": ["Arroz", "Pecuária", "Piscicultura", "Capim", "Pastagens"]
+      };
+      
+      // Filtra culturas baseadas no pH
+      const phMinMax = {
+        "Cacau": [5.0, 6.5],
+        "Açaí": [4.5, 6.5],
+        "Soja": [6.0, 7.0],
+        "Milho": [5.8, 7.0],
+        "Café": [5.5, 6.5],
+        "Manga": [5.5, 7.5],
+        "Arroz": [5.0, 7.0],
+        // Adicione mais culturas conforme necessário
+      };
+      
+      let culturasDisponiveis = culturasBase[bioma] || [];
+      
+      // Ordena por compatibilidade com pH
+      culturasDisponiveis.sort((a, b) => {
+        const aPh = phMinMax[a] || [5.0, 7.0];
+        const bPh = phMinMax[b] || [5.0, 7.0];
+        
+        const aDiff = Math.max(0, aPh[0] - ph) + Math.max(0, ph - aPh[1]);
+        const bDiff = Math.max(0, bPh[0] - ph) + Math.max(0, ph - bPh[1]);
+        
+        return aDiff - bDiff;
+      });
+      
+      return {
+        principal: culturasDisponiveis[0] || "Soja",
+        alternativa: culturasDisponiveis[1] || "Milho",
+        outras: culturasDisponiveis.slice(2, 5) || ["Feijão", "Pastagens"]
+      };
+    }
+
     async function processarFormulario(event) {
       event.preventDefault();
 
@@ -349,23 +565,163 @@
       // Simulamos um delay para parecer que está processando
       setTimeout(() => {
         try {
-          const dadosBioma = getDadosBioma(dados.regiao) || {};
-          const resposta = gerarRespostaSimulada(dados, dadosBioma);
+          const dadosBioma = getDadosBioma(dados.regiao);
+          const ph = parseFloat(dados.ph.replace(',', '.'));
+          const umidade = parseFloat(dados.umidade.replace(',', '.'));
+          const chuva = parseFloat(dados.chuva.replace(',', '.'));
           
-          conteudoResposta.innerHTML = formatarRespostaAgricultura(resposta);
-
+          // Determina o solo mais adequado baseado nos dados
+          let soloPrincipal = dadosBioma?.solos?.[0] || {};
+          if (dadosBioma?.solos?.length > 1) {
+            // Tenta encontrar o solo com pH mais próximo do informado
+            soloPrincipal = dadosBioma.solos.reduce((prev, curr) => {
+              const prevDiff = Math.abs((prev.ph_medio || 6.0) - ph);
+              const currDiff = Math.abs((curr.ph_medio || 6.0) - ph);
+              return prevDiff < currDiff ? prev : curr;
+            });
+          }
+          
+          const texturaSolo = getTexturaSolo(soloPrincipal.textura);
+          
+          // Gera recomendações
+          const recomendacoes = [];
+          
+          // Calagem
+          if (ph < 5.5) {
+            const phDesejado = 6.0;
+            const calcario = calcularCalagem(ph, phDesejado, soloPrincipal.textura);
+            recomendacoes.push(`Aplicação de ${calcario} kg/ha de calcário dolomítico para elevar pH de ${ph.toFixed(1)} para ${phDesejado.toFixed(1)}`);
+          } else if (ph > 7.5) {
+            recomendacoes.push("Solo alcalino, considerar aplicação de gesso agrícola (1-2 ton/ha) para reduzir sódio");
+          }
+          
+          // Adubação nitrogenada
+          const N = calcularAdubacaoNutriente(dados.nitrogenio, 30, 1.5);
+          if (N > 0) {
+            recomendacoes.push(`Adubação nitrogenada: ${N} kg/ha de N (uréia: ${Math.round(N/0.45)} kg/ha)`);
+          }
+          
+          // Adubação fosfatada
+          const P = calcularAdubacaoNutriente(dados.fosforo, 20, 1.8);
+          if (P > 0) {
+            recomendacoes.push(`Adubação fosfatada: ${P} kg/ha de P2O5 (superfosfato simples: ${Math.round(P/0.18)} kg/ha)`);
+          }
+          
+          // Adubação potássica
+          const K = calcularAdubacaoNutriente(dados.potassio, 50, 1.2);
+          if (K > 0) {
+            recomendacoes.push(`Adubação potássica: ${K} kg/ha de K2O (cloreto de potássio: ${Math.round(K/0.60)} kg/ha)`);
+          }
+          
+          // Manejo de umidade
+          if (umidade < 40) {
+            recomendacoes.push("Solo com baixa umidade, considerar irrigação complementar (20-30mm/semana)");
+          } else if (umidade > 80) {
+            recomendacoes.push("Solo com excesso de umidade, avaliar drenagem (valas ou camalhões)");
+          }
+          
+          // Culturas recomendadas
+          const culturas = getCulturasRecomendadas(dados.regiao, ph, {
+            N: dados.nitrogenio,
+            P: dados.fosforo,
+            K: dados.potassio
+          });
+          
+          // Época de plantio
+          let epocaPlantio = "Durante a estação chuvosa";
+          if (dados.temperatura > 25) {
+            epocaPlantio = "No início das chuvas (outubro/novembro)";
+          } else if (dados.temperatura < 15) {
+            epocaPlantio = "Na primavera (setembro/outubro)";
+          }
+          
+          // Monta a resposta
+          let respostaHTML = `
+            <div class="diagnostico-container">
+              <h3>1. Diagnóstico do Solo</h3>
+              <div class="diagnostico-grid">
+                <div class="diagnostico-col">
+                  <h4>Nutrientes</h4>
+                  <ul>
+                    <li>Nitrogênio (N): ${dados.nitrogenio} kg/ha <span class="${dados.nitrogenio < 20 ? 'badge-error' : 'badge-success'}">${dados.nitrogenio < 20 ? 'Baixo' : 'Adequado'}</span></li>
+                    <li>Fósforo (P): ${dados.fosforo} kg/ha <span class="${dados.fosforo < 15 ? 'badge-error' : 'badge-success'}">${dados.fosforo < 15 ? 'Baixo' : 'Adequado'}</span></li>
+                    <li>Potássio (K): ${dados.potassio} kg/ha <span class="${dados.potassio < 40 ? 'badge-error' : 'badge-success'}">${dados.potassio < 40 ? 'Baixo' : 'Adequado'}</span></li>
+                  </ul>
+                </div>
+                
+                <div class="diagnostico-col">
+                  <h4>Características Físicas</h4>
+                  <ul>
+                    <li>pH: ${dados.ph} <span class="${ph < 5.5 || ph > 7.5 ? 'badge-error' : 'badge-success'}">${ph < 5.5 ? 'Ácido' : ph > 7.5 ? 'Alcalino' : 'Ideal'}</span></li>
+                    <li>Umidade: ${dados.umidade}% <span class="${umidade < 40 || umidade > 80 ? 'badge-warning' : 'badge-success'}">${umidade < 40 ? 'Baixa' : umidade > 80 ? 'Alta' : 'Adequada'}</span></li>
+                    <li>Precipitação: ${dados.chuva} mm/mês</li>
+                    <li>Temperatura: ${dados.temperatura}°C</li>
+                  </ul>
+                </div>
+              </div>
+              
+              <h3>2. Recomendações Agrícolas</h3>
+              <div class="recomendacoes-grid">
+                <div class="recomendacao-col">
+                  <h4>Culturas Recomendadas</h4>
+                  <ul>
+                    <li><strong>Principal:</strong> ${culturas.principal}</li>
+                    <li><strong>Alternativa:</strong> ${culturas.alternativa}</li>
+                    <li><strong>Outras opções:</strong> ${culturas.outras.join(', ')}</li>
+                  </ul>
+                  <p><strong>Época ideal de plantio:</strong> ${epocaPlantio}</p>
+                </div>
+                
+                <div class="recomendacao-col">
+                  <h4>Manejo e Correções</h4>
+                  <ul>
+                    ${recomendacoes.map(rec => `<li>${rec}</li>`).join('')}
+                  </ul>
+                </div>
+              </div>
+              
+              <h3>3. Adubação Orgânica</h3>
+              <p>Recomenda-se aplicação de 5-10 ton/ha de composto orgânico para melhorar a estrutura do solo.</p>
+          `;
+          
+          // Adiciona informações do bioma se disponível
           if (dadosBioma) {
-            conteudoResposta.innerHTML += `
+            respostaHTML += `
               <div class="bioma-info">
-                <h3>Características do ${dados.regiao}</h3>
-                <p><strong>Textura predominante:</strong> ${dadosBioma.textura}</p>
-                <p><strong>Precipitação média:</strong> ${dadosBioma.precipitacao}mm/ano</p>
-                <p><strong>Temperatura média:</strong> ${dadosBioma.temperatura}°C</p>
-                <p><strong>Culturas típicas:</strong> ${dadosBioma.aptidao}</p>
+                <h3>4. Características do Bioma ${dados.regiao}</h3>
+                <div class="bioma-grid">
+                  <div class="bioma-col">
+                    <h4>Clima</h4>
+                    <ul>
+                      <li><strong>Precipitação média:</strong> ${dadosBioma.caracteristicas.precipitacao_mm_ano} mm/ano</li>
+                      <li><strong>Temperatura média:</strong> ${dadosBioma.caracteristicas.temperatura_media_c}°C</li>
+                    </ul>
+                  </div>
+                  
+                  <div class="bioma-col">
+                    <h4>Solo Predominante</h4>
+                    <ul>
+                      <li><strong>Tipo:</strong> ${soloPrincipal.tipo || 'Não especificado'}</li>
+                      <li><strong>Textura:</strong> ${soloPrincipal.textura || 'Não especificada'}</li>
+                      ${soloPrincipal.ph_medio ? `<li><strong>pH médio:</strong> ${soloPrincipal.ph_medio}</li>` : ''}
+                      ${texturaSolo ? `<li><strong>Retenção água:</strong> ${texturaSolo.caracteristicas.retencao_agua}</li>` : ''}
+                    </ul>
+                  </div>
+                  
+                  <div class="bioma-col">
+                    <h4>Aptidão Agrícola</h4>
+                    <p>${soloPrincipal.aptidao || 'Não especificada'}</p>
+                  </div>
+                </div>
               </div>
             `;
           }
+          
+          respostaHTML += `</div>`;
+          
+          conteudoResposta.innerHTML = respostaHTML;
 
+          // Botão de copiar
           conteudoResposta.innerHTML += `
             <div style="text-align:center;margin-top:2em;">
               <button id="btn-copiar" style="background:#0078D7;color:white;border:none;padding:0.5em 1em;border-radius:4px;cursor:pointer;font-size:0.9em;">
@@ -401,141 +757,7 @@
           document.getElementById('btn-text').textContent = 'Analisar Solo';
           document.getElementById('submit-btn').disabled = false;
         }
-      }, 1500); // Delay de 1.5 segundos
-    }
-
-    function gerarRespostaSimulada(dados, dadosBioma) {
-      const ph = parseFloat(dados.ph.replace(',', '.'));
-      const umidade = parseFloat(dados.umidade.replace(',', '.'));
-      const chuva = parseFloat(dados.chuva.replace(',', '.'));
-      
-      // Culturas recomendadas por região
-      const culturasPorRegiao = {
-        "Amazônia": {
-          principal: "Cacau",
-          alternativa: "Açaí",
-          outras: ["Guaraná", "Pupunha"]
-        },
-        "Cerrado": {
-          principal: "Soja",
-          alternativa: "Milho",
-          outras: ["Algodão", "Sorgo"]
-        },
-        "Mata Atlântica": {
-          principal: "Café",
-          alternativa: "Cana-de-açúcar",
-          outras: ["Eucalipto", "Banana"]
-        },
-        "Caatinga": {
-          principal: "Manga",
-          alternativa: "Uva irrigada",
-          outras: ["Caju", "Goiaba"]
-        },
-        "Pampa": {
-          principal: "Arroz",
-          alternativa: "Trigo",
-          outras: ["Soja", "Pastagens"]
-        },
-        "Pantanal": {
-          principal: "Arroz",
-          alternativa: "Pecuária",
-          outras: ["Piscicultura", "Capim"]
-        }
-      };
-      
-      const culturas = culturasPorRegiao[dados.regiao] || {
-        principal: "Soja",
-        alternativa: "Milho",
-        outras: ["Feijão", "Trigo"]
-      };
-      
-      // Recomendações baseadas nos valores
-      const recomendacoes = [];
-      
-      // Recomendações de pH
-      if (ph < 5.5) {
-        recomendacoes.push("Aplicação de calcário para corrigir acidez do solo");
-        recomendacoes.push(`Dose sugerida: ${Math.round((6.0 - ph) * 2000)} kg/ha de calcário dolomítico`);
-      } else if (ph > 7.5) {
-        recomendacoes.push("Solo alcalino, considerar aplicação de gesso agrícola");
-      } else {
-        recomendacoes.push("pH do solo dentro da faixa ideal para maioria das culturas");
-      }
-      
-      // Recomendações de nutrientes
-      if (dados.nitrogenio < 20) {
-        recomendacoes.push(`Adubação nitrogenada recomendada: ${Math.round((30 - dados.nitrogenio) * 1.5)} kg/ha de N`);
-      }
-      
-      if (dados.fosforo < 15) {
-        recomendacoes.push(`Adubação fosfatada recomendada: ${Math.round((25 - dados.fosforo) * 1.8)} kg/ha de P2O5`);
-      }
-      
-      if (dados.potassio < 40) {
-        recomendacoes.push(`Adubação potássica recomendada: ${Math.round((60 - dados.potassio) * 1.2)} kg/ha de K2O`);
-      }
-      
-      // Recomendações de umidade
-      if (umidade < 40) {
-        recomendacoes.push("Solo com baixa umidade, considerar irrigação complementar");
-      } else if (umidade > 80) {
-        recomendacoes.push("Solo com excesso de umidade, avaliar drenagem");
-      }
-      
-      // Época de plantio baseada na temperatura
-      let epocaPlantio = "Durante a estação chuvosa";
-      if (dados.temperatura > 25) {
-        epocaPlantio = "No início das chuvas (outubro/novembro)";
-      } else if (dados.temperatura < 15) {
-        epocaPlantio = "Na primavera (setembro/outubro)";
-      }
-      
-      return `
-      <h3>1. Diagnóstico do Solo</h3>
-      <p><strong>Nutrientes:</strong></p>
-      <ul>
-        <li>Nitrogênio: ${dados.nitrogenio} kg/ha (${dados.nitrogenio < 20 ? 'Baixo' : 'Adequado'})</li>
-        <li>Fósforo: ${dados.fosforo} kg/ha (${dados.fosforo < 15 ? 'Baixo' : 'Adequado'})</li>
-        <li>Potássio: ${dados.potassio} kg/ha (${dados.potassio < 40 ? 'Baixo' : 'Adequado'})</li>
-      </ul>
-      
-      <p><strong>Características físicas:</strong></p>
-      <ul>
-        <li>pH: ${dados.ph} (${ph < 5.5 ? 'Ácido' : ph > 7.5 ? 'Alcalino' : 'Ideal'})</li>
-        <li>Umidade: ${dados.umidade}% (${umidade < 40 ? 'Baixa' : umidade > 80 ? 'Alta' : 'Adequada'})</li>
-        <li>Precipitação: ${dados.chuva} mm/mês</li>
-        <li>Temperatura: ${dados.temperatura}°C</li>
-      </ul>
-      
-      <h3>2. Recomendações Agrícolas</h3>
-      <p><strong>Culturas recomendadas para ${dados.regiao}:</strong></p>
-      <ul>
-        <li>Principal: ${culturas.principal}</li>
-        <li>Alternativa: ${culturas.alternativa}</li>
-        <li>Outras opções: ${culturas.outras.join(', ')}</li>
-      </ul>
-      
-      <p><strong>Época ideal de plantio:</strong> ${epocaPlantio}</p>
-      
-      <h3>3. Manejo e Correções</h3>
-      <ul>
-        ${recomendacoes.map(rec => `<li>${rec}</li>`).join('')}
-      </ul>
-      
-      <h3>4. Adubação Orgânica</h3>
-      <p>Recomenda-se aplicação de 5-10 ton/ha de composto orgânico para melhorar a estrutura do solo.</p>
-      `;
-    }
-
-    function formatarRespostaAgricultura(texto) {
-      // Remove markdown simples e formata parágrafos
-      texto = texto.replace(/\*\*/g, '')
-                   .replace(/#{1,6}/g, '')
-                   .replace(/`/g, '')
-                   .replace(/\n\n/g, '</p><p>')
-                   .replace(/\n/g, '<br>');
-      
-      return `<div>${texto}</div>`;
+      }, 1500);
     }
 
     document.addEventListener('DOMContentLoaded', function() {
