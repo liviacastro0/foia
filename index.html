@@ -111,6 +111,56 @@
   </div>
 
   <script>
+    // --- Início do seu código de chave API e estado ---
+    // Chave da API será substituída pelo GitHub Actions no deploy
+    let openRouterApiKey = "%%OPENROUTER_API_KEY_PLACEHOLDER%%";
+
+    // Estado global do chat e dados auxiliares
+    const chatState = {
+      chatId: null,
+      currentQuestionData: null,
+      questionsList: [],
+      potentialsTable: {},
+      knowledgeBase: ""
+    };
+
+    // OPENROUTER_API_KEYS: array vazio, as chaves nunca ficam no frontend público!
+    // Você não precisa mais deste array vazio se estiver usando localStorage para o usuário inserir a chave.
+    // const OPENROUTER_API_KEYS = []; 
+
+    // Função para obter a chave API (do localStorage ou solicitando ao usuário)
+    function getOpenRouterApiKey() {
+      // Tenta obter a chave do localStorage primeiro
+      let storedKey = localStorage.getItem('openRouterApiKey');
+      if (storedKey && storedKey !== "%%OPENROUTER_API_KEY_PLACEHOLDER%%") {
+        openRouterApiKey = storedKey;
+        return openRouterApiKey;
+      }
+
+      // Se não há chave no localStorage, ou é o placeholder, pede ao usuário
+      if (!openRouterApiKey || openRouterApiKey === "%%OPENROUTER_API_KEY_PLACEHOLDER%%") {
+        let userKey = "";
+        // Loop até o usuário fornecer uma chave válida ou cancelar
+        while (!userKey) {
+          userKey = prompt("Por favor, insira sua chave API do OpenRouter:");
+          if (userKey === null) {
+            alert("Chave API é necessária para usar a IA.");
+            return null; // O usuário cancelou
+          }
+          userKey = userKey.trim();
+          if (!userKey) {
+            alert("Chave API é necessária para usar a IA.");
+          }
+        }
+        openRouterApiKey = userKey;
+        // Armazena a chave no localStorage para usos futuros
+        localStorage.setItem('openRouterApiKey', userKey);
+      }
+      return openRouterApiKey;
+    }
+    // --- Fim do seu código de chave API e estado ---
+
+
     let dadosBiomas = {};
     let todasCulturas = new Set();
 
@@ -446,6 +496,16 @@
     async function processarFormulario(event) {
       event.preventDefault();
 
+      // **Obtém a chave da API antes de fazer a chamada**
+      const key = getOpenRouterApiKey();
+      if (!key) {
+        // Se o usuário cancelou ou não forneceu a chave, para o processo
+        document.getElementById('spinner').style.display = 'none';
+        document.getElementById('btn-text').textContent = 'Analisar Solo';
+        document.getElementById('submit-btn').disabled = false;
+        return false;
+      }
+
       const dados = {
         nitrogenio: parseInt(document.getElementById('nitrogenio').value),
         fosforo: parseInt(document.getElementById('fosforo').value),
@@ -561,8 +621,7 @@ Dados:
 
 Responda em tópicos com linguagem técnica acessível.`;
 
-          const key = "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";
-
+          // A chave 'key' já está sendo passada para callOpenRouter
           callOpenRouter(prompt, key).then(respostaIA => {
             let respostaHTML = `
               <div class="diagnostico-container">
@@ -581,7 +640,7 @@ Responda em tópicos com linguagem técnica acessível.`;
                     <h4>Características Físicas</h4>
                     <ul>
                       <li>pH: ${dados.ph} <span class="${ph < 5.5 || ph > 7.5 ? 'badge-error' : 'badge-success'}">${ph < 5.5 ? 'Ácido' : ph > 7.5 ? 'Alcalino' : 'Ideal'}</span></li>
-                      <li>Umidade: ${dados.umidade}% <span class="${umidade < 40 || umidade > 80 ? 'badge-warning' : 'badge-success'}">${umidade < 40 ? 'Baixa' : umidade > 80 ? 'Alta' : 'Adequada'}</span></li>
+                      <li>Umidade: ${umidade}% <span class="${umidade < 40 || umidade > 80 ? 'badge-warning' : 'badge-success'}">${umidade < 40 ? 'Baixa' : umidade > 80 ? 'Alta' : 'Adequada'}</span></li>
                       <li>Precipitação: ${dados.chuva} mm/mês</li>
                       <li>Temperatura: ${dados.temperatura}°C</li>
                     </ul>
@@ -612,7 +671,7 @@ Responda em tópicos com linguagem técnica acessível.`;
                 <div class="ia-recomendacoes">
                   ${formatarRespostaAgricultura(respostaIA)}
                 </div>
-            `;
+              `;
 
             if (dadosBioma) {
               respostaHTML += `
@@ -757,7 +816,7 @@ Responda em tópicos com linguagem técnica acessível.`;
       carregarDadosBiomas();
 
       aplicarMascaraComVirgula('umidade', 100);
-      aplicarMascaraPH('ph', 2, 14, 0);
+      aplicarMascaraPH('ph', 2, 14, 0); // O terceiro e quarto parâmetros não são usados nesta função
       mascaraChuva('chuva');
 
       limitarValor('nitrogenio', 0, 500);
